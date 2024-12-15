@@ -1,0 +1,16 @@
+---
+
+- name: Scan library
+  ansible.builtin.command: >
+    {{ docker_cmd }} compose exec navidrome
+      /app/navidrome scan {{ full | default(false) | ternary('--full', '') }}
+  args:
+    chdir: "{{ docker_project_path }}"
+  changed_when: false
+  register: _scan
+
+- name: Show scan result
+  ansible.builtin.debug:
+    msg:
+      - "{{ _scan.stdout_lines }}"
+      - "{{ _scan.stderr_lines }}"

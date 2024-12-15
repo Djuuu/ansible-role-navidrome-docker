@@ -78,6 +78,8 @@ Some variables allow integration with:
 Example Playbook
 ----------------
 
+Install Navidrome:
+
 ```yaml
 - hosts: all
   gather_facts: true
@@ -88,6 +90,21 @@ Example Playbook
 
   roles:
     - djuuu.navidrome_docker
+```
+
+Scan library:
+
+```yaml
+- hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Scan library
+      ansible.builtin.include_role: { name: djuuu.navidrome_docker, tasks_from: scan }
+```
+
+```bash
+ansible-playbook navidrome-scan-library.yml -e full=true
 ```
 
 License
