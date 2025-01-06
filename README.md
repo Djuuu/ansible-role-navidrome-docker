@@ -32,7 +32,7 @@ Available role variables are listed below, along with default values (see `defau
 
 navidrome_project_name: navidrome
 
-# Docker project dynamic vars (uses `docker_project_name` prefix, adapt if overriden)
+# Docker project dynamic vars (uses `docker_project_name` prefix, adapt if overridden)
 
 # Port targeted by Traefik router
 navidrome_traefik_loadbalancer_server_port: 4533
