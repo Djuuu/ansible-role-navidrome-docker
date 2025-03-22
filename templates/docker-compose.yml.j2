@@ -16,12 +16,29 @@ services:
     {{ docker_project_compose_service_additional_options | indent(4) }}
 
     environment:
-      ND_SCANSCHEDULE:   {{ navidrome_scanschedule }}
-      ND_LOGLEVEL:       {{ navidrome_loglevel }}
-      ND_SESSIONTIMEOUT: {{ navidrome_sessiontimeout }}
       {% if navidrome_baseurl %}
       ND_BASEURL:        {{ navidrome_baseurl }}
       {% endif %}
+      ND_LOGLEVEL:       {{ navidrome_loglevel }}
+
+      ND_SCANNER_ENABLED: {{ navidrome_scanner_enabled | ternary('true', 'false') }}
+      ND_SCANNER_SCHEDULE: {{ navidrome_scanner_schedule }}
+
+      ND_SESSIONTIMEOUT: {{ navidrome_sessiontimeout }}
+
+      ND_ENABLEINSIGHTSCOLLECTOR: {{ navidrome_enableinsightscollector | ternary('true', 'false') }}
+
+      {% for item in navidrome_env | default({}, true) | dict2items %}
+      {% if item.value is boolean %}
+      {{ item.key }}: {{ item.value | ternary('true', 'false') }}
+      {% elif item.value is number %}
+      {{ item.key }}: {{ item.value }}
+      {% elif item.value == '' or item.value == None %}
+      {{ item.key }}:
+      {% else %}
+      {{ item.key }}: "{{ item.value }}"
+      {% endif %}
+      {% endfor %}
 
     volumes:
       # Navidrome data
