@@ -51,6 +51,11 @@ Base configuration:
 # deluan/navidrome container version
 navidrome_version: latest
 
+# UID container is running as
+navidrome_puid: "{{ ansible_user_uid }}"
+# GID container is running as
+navidrome_pgid: "{{ ansible_user_gid }}"
+
 # Navidrome network mode (bridge|host)
 navidrome_network_mode: bridge
 

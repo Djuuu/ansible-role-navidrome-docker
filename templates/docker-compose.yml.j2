@@ -14,7 +14,7 @@ services:
     network_mode: host
     {% endif %}
 
-    user: {{ ansible_user_uid }}:{{ ansible_user_gid }}
+    user: {{ navidrome_puid }}:{{ navidrome_pgid }}
 
     {{ docker_project_compose_service_additional_options | indent(4) }}
 
