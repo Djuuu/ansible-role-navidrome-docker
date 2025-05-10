@@ -51,9 +51,12 @@ Base configuration:
 # deluan/navidrome container version
 navidrome_version: latest
 
+# Navidrome network mode (bridge|host)
+navidrome_network_mode: bridge
+
+
 # Path to music collection
 navidrome_music_volume: ./music
-
 
 # Exposed service base URL
 navidrome_baseurl: "https://music.example.net"

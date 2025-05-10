@@ -10,6 +10,9 @@ services:
     container_name: {{ docker_project_slug }}
     image: deluan/navidrome:{{ navidrome_version }}
     restart: unless-stopped
+    {% if navidrome_network_mode == 'host' %}
+    network_mode: host
+    {% endif %}
 
     user: {{ ansible_user_uid }}:{{ ansible_user_gid }}
 
@@ -57,7 +60,9 @@ services:
       # What's up Docker? - https://github.com/getwud/wud
       wud.tag.include: ^\d+\.\d+\.\d+$$
 
+{% if navidrome_network_mode != 'host' %}
 networks:
   {{ docker_project_default_network | indent(2) }}
+{% endif %}
 
 {{ docker_project_compose_additional_options }}
