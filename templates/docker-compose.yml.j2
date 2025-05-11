@@ -46,6 +46,10 @@ services:
     volumes:
       # Navidrome data
       - ./data:/data
+      {% if navidrome_backup_volume %}
+      # Navidrome library backup
+      - {{ navidrome_backup_volume }}:/data/backup
+      {% endif %}
       # Music directory
       - type: bind
         source: {{ navidrome_music_volume }}

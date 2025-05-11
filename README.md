@@ -60,11 +60,16 @@ navidrome_pgid: "{{ ansible_user_gid }}"
 navidrome_network_mode: bridge
 
 
-# Path to music collection
-navidrome_music_volume: ./music
-
 # Exposed service base URL
 navidrome_baseurl: "https://music.example.net"
+
+# Path to music collection on host
+navidrome_music_volume: ./music
+
+# Path to library backup directory on host
+# (also set ND_BACKUP_PATH, ND_BACKUP_SCHEDULE and ND_BACKUP_COUNT in navidrome_env)
+navidrome_backup_volume: # ex: ./backup
+
 
 # Log level. Useful for troubleshooting. Possible values: error, warn, info, debug, trace
 navidrome_loglevel: info
@@ -103,11 +108,11 @@ navidrome_env:
   # ND_ARTISTARTPRIORITY: "artist.*, album/artist.*, external"
 
   ## Path to store backups. Set to "" to disable backups.
-  # ND_BACKUP_PATH: "" # (disabled)
+  # ND_BACKUP_PATH: "/data/backup"
   ## Schedule for automatic backups. Use Cron syntax
-  # ND_BACKUP_SCHEDULE: "" # (disabled)
+  # ND_BACKUP_SCHEDULE: "15 6 * * 6" # At 06:15 on Saturday
   ## Number of backups to keep
-  # ND_BACKUP_COUNT: 0 # (disabled)
+  # ND_BACKUP_COUNT: 5
 
   ## Configure the order to look for cover art images. Use special embedded value to get embedded images from the audio files
   # ND_COVERARTPRIORITY: "cover.*, folder.*, front.*, embedded, external"
