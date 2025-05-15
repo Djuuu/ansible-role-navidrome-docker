@@ -7,16 +7,14 @@ name: {{ docker_project_slug }}
 services:
 
   navidrome:
-    container_name: {{ docker_project_slug }}
     image: deluan/navidrome:{{ navidrome_version }}
-    restart: unless-stopped
-    {% if navidrome_network_mode == 'host' %}
-    network_mode: host
-    {% endif %}
-
+    container_name: {{ docker_project_slug }}
+    restart: {{ docker_project_restart }}
     user: {{ navidrome_puid }}:{{ navidrome_pgid }}
 
-    {{ docker_project_compose_service_additional_options | indent(4) }}
+    {{ docker_project_service_network_options | indent(4) }}
+
+    {{ docker_project_service_additional_options | indent(4) }}
 
     environment:
       {% if navidrome_baseurl %}
@@ -64,9 +62,6 @@ services:
       # What's up Docker? - https://github.com/getwud/wud
       wud.tag.include: ^\d+\.\d+\.\d+$$
 
-{% if navidrome_network_mode != 'host' %}
-networks:
-  {{ docker_project_default_network | indent(2) }}
-{% endif %}
+{{ docker_project_networks }}
 
 {{ docker_project_compose_additional_options }}
