@@ -38,7 +38,7 @@ navidrome_project_name: navidrome
 navidrome_traefik_loadbalancer_server_port: 4533
 
 # Main service additional docker-compose options (ex: cpu_shares, deploy, ...)
-navidrome_compose_service_additional_options: |
+navidrome_service_additional_options: |
   #ports:
   #  - "4533:4533"
 ```
@@ -55,9 +55,6 @@ navidrome_version: latest
 navidrome_puid: "{{ ansible_user_uid }}"
 # GID container is running as
 navidrome_pgid: "{{ ansible_user_gid }}"
-
-# Navidrome network mode (bridge|host)
-navidrome_network_mode: bridge
 
 
 # Exposed service base URL
