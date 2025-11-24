@@ -2,7 +2,7 @@
 
 - name: Scan library
   ansible.builtin.command: >
-    {{ docker_cmd }} compose exec navidrome
+    {{ docker_compose_cmd }} exec navidrome
       /app/navidrome scan {{ full | default(false) | ternary('--full', '') }}
   args:
     chdir: "{{ docker_project_path }}"
