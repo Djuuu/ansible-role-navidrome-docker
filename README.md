@@ -52,9 +52,9 @@ Base configuration:
 navidrome_version: latest
 
 # UID container is running as
-navidrome_puid: "{{ ansible_user_uid }}"
+navidrome_puid: "{{ ansible_facts['user_uid'] }}"
 # GID container is running as
-navidrome_pgid: "{{ ansible_user_gid }}"
+navidrome_pgid: "{{ ansible_facts['user_gid'] }}"
 
 
 # Exposed service base URL
